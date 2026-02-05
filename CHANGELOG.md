@@ -23,5 +23,5 @@
 ---
 
 <!-- 版本链接 -->
-[Unreleased]: https://github.com/yourorg/drone-flight-lab/compare/v0.1.0-alpha...HEAD
-[0.1.0-alpha]: https://github.com/yourorg/drone-flight-lab/releases/tag/v0.1.0-alpha
+[Unreleased]: https://github.com/ProbeYuki/drone-flight-lab/compare/v0.1.0-alpha...HEAD
+[0.1.0-alpha]: https://github.com/ProbeYuki/drone-flight-lab/releases/tag/v0.1.0-alpha
