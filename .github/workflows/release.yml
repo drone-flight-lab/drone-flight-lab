@@ -1,0 +1,36 @@
+# Release Pipeline
+# 触发条件: 推送 tag (v*)
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-release:
+    name: Build Release Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build firmware binary
+        run: |
+          # TODO: 生成发布固件
+          echo "Build release firmware"
+
+      - name: Generate release notes
+        run: |
+          # TODO: 从 CHANGELOG 提取版本说明
+          echo "Extract release notes"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            # TODO: 添加发布文件
+            # build/*.bin
+            # build/*.hex
+          body_path: RELEASE_NOTES.md
+          draft: true

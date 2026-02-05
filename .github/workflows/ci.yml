@@ -1,0 +1,82 @@
+# CI Pipeline
+# 触发条件: push/PR 到 main 分支
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ==================== 理论模块 ====================
+  theory-check:
+    name: Theory - Lint & Simulation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint
+        run: black --check theory/
+
+      - name: Run simulations
+        run: pytest theory/simulation/ -v
+
+  # ==================== 实装模块 ====================
+  firmware-build:
+    name: Firmware - Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup ARM toolchain
+        run: |
+          # TODO: 配置交叉编译工具链
+          echo "ARM GCC setup placeholder"
+
+      - name: Build firmware
+        run: |
+          # TODO: 编译固件
+          echo "Build placeholder"
+
+  firmware-test:
+    name: Firmware - Unit Tests
+    runs-on: ubuntu-latest
+    needs: firmware-build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run unit tests
+        run: |
+          # TODO: 运行嵌入式单元测试
+          echo "Test placeholder"
+
+  # ==================== 静态分析 ====================
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: C/C++ static analysis
+        run: |
+          # TODO: cppcheck / clang-tidy
+          echo "Static analysis placeholder"
+
+  # ==================== 集成检查 ====================
+  integration:
+    name: Integration Check
+    runs-on: ubuntu-latest
+    needs: [theory-check, firmware-test]
+    steps:
+      - name: All checks passed
+        run: echo "Ready for merge"
